@@ -36,7 +36,7 @@ class TurnOffLedService {
 
     led.state = true;
 
-    return ledRepository.save({
+    return await ledRepository.save({
       id: led.id,
       state: false,
     });
