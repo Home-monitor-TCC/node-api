@@ -20,7 +20,7 @@ app.use("/board", boardRouter);
 app.use("/component", componentRouter);
 app.use("/temperature", temperatureRouter);
 app.use("/led", ledRouter);
-app.use("/db", databaseDumpRouter)
+app.use("/db", databaseDumpRouter);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
