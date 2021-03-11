@@ -10,7 +10,7 @@ import {
 
 @Entity("temperature_data")
 class TemperatureData {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()

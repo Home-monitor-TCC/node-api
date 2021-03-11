@@ -11,6 +11,7 @@ export default class CreateTemperatureDataTable1615388269858
             name: "id",
             type: "uuid",
             isPrimary: true,
+            isUnique: true,
             generationStrategy: "uuid",
             default: "uuid_generate_v4()",
           },

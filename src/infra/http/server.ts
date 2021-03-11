@@ -7,6 +7,7 @@ import "../typeorm";
 import AppError from "../../errors/AppError";
 import boardRouter from "./routes/board.routes";
 import componentRouter from "./routes/components.routes";
+import temperatureRouter from "./routes/temperature.routes";
 
 const port = 2233;
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/board", boardRouter);
 app.use("/component", componentRouter);
+app.use("/temperature", temperatureRouter);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
