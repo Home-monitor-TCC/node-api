@@ -41,5 +41,7 @@ export default class CreateTemperatureDataTable1615388269858
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable("temperature_data");
+  }
 }

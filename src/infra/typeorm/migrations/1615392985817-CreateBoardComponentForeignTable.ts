@@ -8,7 +8,7 @@ export class CreateBoardComponentForeignTable1615392985817
       new TableForeignKey({
         name: "BoardComponent",
         columnNames: ["board_id"],
-        referencedColumnNames: ["id"],
+        referencedColumnNames: ["mac_address"],
         referencedTableName: "board",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
@@ -17,9 +17,6 @@ export class CreateBoardComponentForeignTable1615392985817
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey(
-      "temperature_sensor",
-      "ComponentTemperatureSensor"
-    );
+    await queryRunner.dropForeignKey("component", "BoardComponent");
   }
 }

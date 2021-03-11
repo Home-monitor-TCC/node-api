@@ -36,3 +36,5 @@ class Component {
   @Exclude()
   updated_at: Date;
 }
+
+export default Component;

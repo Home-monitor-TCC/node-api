@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Generated,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -12,6 +13,7 @@ class TemperatureSensor {
   @PrimaryColumn()
   id: string;
 
+  @Generated("uuid")
   @Column()
   data_group_id: string;
 
@@ -23,3 +25,5 @@ class TemperatureSensor {
   @Exclude()
   updated_at: Date;
 }
+
+export default TemperatureSensor;

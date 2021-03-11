@@ -7,16 +7,10 @@ export class CreateBoardTable1615392806584 implements MigrationInterface {
         name: "board",
         columns: [
           {
-            name: "id",
-            type: "uuid",
-            isPrimary: true,
-            isUnique: true,
-            generationStrategy: "uuid",
-            default: "uuid_generate_v4()",
-          },
-          {
             name: "mac_address",
             type: "varchar",
+            isPrimary: true,
+            isUnique: true,
           },
           {
             name: "created_at",

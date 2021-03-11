@@ -13,6 +13,7 @@ export default class CreateLedTable1615387511667 implements MigrationInterface {
           {
             name: "state",
             type: "boolean",
+            default: "false",
           },
           {
             name: "created_at",

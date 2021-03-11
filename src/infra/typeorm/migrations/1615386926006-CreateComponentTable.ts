@@ -21,7 +21,7 @@ export default class CreateComponentTable1615386926006
           },
           {
             name: "board_id",
-            type: "uuid",
+            type: "varchar",
           },
           {
             name: "name",

@@ -30,3 +30,5 @@ class TemperatureData {
   @Exclude()
   updated_at: Date;
 }
+
+export default TemperatureData;

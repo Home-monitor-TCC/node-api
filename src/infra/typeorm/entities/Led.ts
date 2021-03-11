@@ -23,3 +23,5 @@ class Led {
   @Exclude()
   updated_at: Date;
 }
+
+export default Led;

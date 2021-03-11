@@ -34,5 +34,7 @@ export default class CreateTemperatureSensorTable1615388139003
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable("temperature_sensor");
+  }
 }

@@ -10,9 +10,6 @@ import {
 @Entity("board")
 class Board {
   @PrimaryColumn()
-  id: string;
-
-  @Column()
   mac_address: string;
 
   @CreateDateColumn()
@@ -23,3 +20,5 @@ class Board {
   @Exclude()
   updated_at: Date;
 }
+
+export default Board;
