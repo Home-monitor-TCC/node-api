@@ -10,20 +10,16 @@ import {
 
 @Entity("temperature_data")
 class TemperatureData {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   sensor_id: string;
 
   @Column()
-  date: Date;
-
-  @Column()
   temperature: number;
 
   @CreateDateColumn()
-  @Exclude()
   created_at: Date;
 
   @UpdateDateColumn()

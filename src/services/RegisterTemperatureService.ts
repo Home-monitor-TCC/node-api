@@ -6,11 +6,10 @@ import Component from "../infra/typeorm/entities/Component";
 import TemperatureData from "../infra/typeorm/entities/TemperatureData";
 import TemperatureSensor from "../infra/typeorm/entities/TemperatureSensor";
 
-
 interface IRequest {
-    id: string,
-    temperature: number,
-    mac_address: string,
+  id: string;
+  temperature: number;
+  mac_address: string;
 }
 
 class RegisterTemperatureService {
@@ -23,11 +22,13 @@ class RegisterTemperatureService {
     const temperatureDataRepository = getRepository(TemperatureData);
     const temperatureSensorRepository = getRepository(TemperatureSensor);
 
+    const date = Date.now();
+
     const component = await componentRepository.findOne({
       where: {
         id,
-        type:2,
-        board_id:mac_address
+        type: 2,
+        board_id: mac_address,
       },
     });
 
@@ -36,18 +37,17 @@ class RegisterTemperatureService {
     }
 
     const sensor = await temperatureSensorRepository.findOne({
-        where:{
-            id:component.id,
-        }
+      where: {
+        id: component.id,
+      },
     });
 
     const data = temperatureDataRepository.create({
-        sensor_id : sensor?.data_group_id,
-        date : Date.now(),
-        temperature,
+      sensor_id: sensor?.data_group_id,
+      temperature,
     });
-    
-    await temperatureSensorRepository.save(data);
+
+    await temperatureDataRepository.save(data);
 
     return data;
   }

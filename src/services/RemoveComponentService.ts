@@ -1,10 +1,7 @@
 import { getRepository } from "typeorm";
 
 import AppError from "../errors/AppError";
-import Board from "../infra/typeorm/entities/Board";
 import Component from "../infra/typeorm/entities/Component";
-import Led from "../infra/typeorm/entities/Led";
-import TemperatureSensor from "../infra/typeorm/entities/TemperatureSensor";
 
 interface IRequest {
   id: string;

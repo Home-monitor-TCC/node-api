@@ -20,10 +20,6 @@ export default class CreateTemperatureDataTable1615388269858
             type: "uuid",
           },
           {
-            name: "date",
-            type: "timestamp",
-          },
-          {
             name: "temperature",
             type: "numeric(4,2)",
           },
