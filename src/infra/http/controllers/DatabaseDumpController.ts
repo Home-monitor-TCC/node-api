@@ -12,6 +12,6 @@ export default class DatabaseDumpController {
       mac_address,
     });
 
-    return response.json(classToClass(db));
+    return response.json(db);
   }
 }

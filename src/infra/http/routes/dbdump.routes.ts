@@ -5,7 +5,6 @@ const databaseDumpRouter = Router();
 
 const databaseDumpController = new DatabaseDumpController();
 
-databaseDumpRouter.post("/read", databaseDumpController.read);
+databaseDumpRouter.get("/read", databaseDumpController.read);
 
-
-export default Router;
+export default databaseDumpRouter;
