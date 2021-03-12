@@ -9,6 +9,7 @@ import boardRouter from "./routes/board.routes";
 import componentRouter from "./routes/components.routes";
 import temperatureRouter from "./routes/temperature.routes";
 import ledRouter from "./routes/led.routes";
+import dbDumpRouter from "./routes/dbdump.routes";
 
 const port = 2233;
 
@@ -19,6 +20,7 @@ app.use("/board", boardRouter);
 app.use("/component", componentRouter);
 app.use("/temperature", temperatureRouter);
 app.use("/led", ledRouter);
+app.use("/db", dbDumpRouter);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
