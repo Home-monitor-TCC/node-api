@@ -3,15 +3,17 @@ import { getRepository } from "typeorm";
 
 import AppError from "../errors/AppError";
 import Board from "../infra/typeorm/entities/Board";
+import Component from "../infra/typeorm/entities/Component";
 
 interface IRequest {
-  id: string;
+  pin: number;
   mac_address: string;
 }
 
 class TurnOffLedService {
-  public async execute({ mac_address, id }: IRequest): Promise<Led> {
+  public async execute({ mac_address, pin }: IRequest): Promise<Led> {
     const boardRepository = getRepository(Board);
+    const componentRepository = getRepository(Component);
     const ledRepository = getRepository(Led);
 
     const checkBoard = await boardRepository.findOne({
@@ -24,20 +26,20 @@ class TurnOffLedService {
       throw new AppError("Hardware não cadastrado");
     }
 
-    const led = await ledRepository.findOne({
+    const component = await componentRepository.findOne({
       where: {
-        id,
+        pin,
+        board_id: mac_address,
+        type: 1,
       },
     });
 
-    if (!led) {
+    if (!component) {
       throw new AppError("Led não cadastrado");
     }
 
-    led.state = true;
-
     return await ledRepository.save({
-      id: led.id,
+      id: component.id,
       state: false,
     });
   }

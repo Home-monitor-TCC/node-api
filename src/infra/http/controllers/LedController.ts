@@ -6,11 +6,11 @@ import TurnOffLedService from "../../../services/TurnOffLedService";
 
 export default class LedController {
   public async turnOn(request: Request, response: Response): Promise<Response> {
-    const { id, mac_address } = request.body;
+    const { pin, mac_address } = request.body;
 
     const turnOnLedService = new TurnOnLedService();
     const led = await turnOnLedService.execute({
-      id,
+      pin,
       mac_address,
     });
 
@@ -21,11 +21,11 @@ export default class LedController {
     request: Request,
     response: Response
   ): Promise<Response> {
-    const { id, mac_address } = request.body;
+    const { pin, mac_address } = request.body;
 
     const turnOffLedService = new TurnOffLedService();
     const led = await turnOffLedService.execute({
-      id,
+      pin,
       mac_address,
     });
 
