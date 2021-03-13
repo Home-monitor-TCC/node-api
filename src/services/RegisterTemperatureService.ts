@@ -5,51 +5,75 @@ import AppError from "../errors/AppError";
 import Component from "../infra/typeorm/entities/Component";
 import TemperatureData from "../infra/typeorm/entities/TemperatureData";
 import TemperatureSensor from "../infra/typeorm/entities/TemperatureSensor";
-
-interface IRequest {
-  id: string;
+interface ITemperatureData {
+  pin: number;
   temperature: number;
+}
+interface IRequest {
+  temperatureDataArray: ITemperatureData[];
   mac_address: string;
 }
 
 class RegisterTemperatureService {
   public async execute({
-    id,
-    temperature,
+    temperatureDataArray,
     mac_address,
-  }: IRequest): Promise<TemperatureData> {
+  }: IRequest): Promise<ITemperatureData[]> {
     const componentRepository = getRepository(Component);
     const temperatureDataRepository = getRepository(TemperatureData);
     const temperatureSensorRepository = getRepository(TemperatureSensor);
 
+    var responseData: ITemperatureData[] = [];
+
     const date = Date.now();
+    for (var i = 0; i < temperatureDataArray.length; i++) {
+      const { pin } = temperatureDataArray[i];
 
-    const component = await componentRepository.findOne({
-      where: {
-        id,
-        type: 2,
-        board_id: mac_address,
-      },
-    });
+      const component = await componentRepository.findOne({
+        where: {
+          pin,
+          type: 2,
+          board_id: mac_address,
+        },
+      });
 
-    if (!component) {
-      throw new AppError("Componente não encontrado");
+      if (!component) {
+        throw new AppError("Componente não encontrado");
+      }
     }
 
-    const sensor = await temperatureSensorRepository.findOne({
-      where: {
-        id: component.id,
-      },
-    });
+    for (var j = 0; j < temperatureDataArray.length; j++) {
+      const { pin, temperature } = temperatureDataArray[j];
 
-    const data = temperatureDataRepository.create({
-      sensor_id: sensor?.data_group_id,
-      temperature,
-    });
+      const component = await componentRepository.findOne({
+        where: {
+          pin,
+          type: 2,
+          board_id: mac_address,
+        },
+        cache: true,
+      });
 
-    await temperatureDataRepository.save(data);
+      const sensor = await temperatureSensorRepository.findOne({
+        where: {
+          id: component?.id,
+        },
+      });
 
-    return data;
+      const data = temperatureDataRepository.create({
+        sensor_id: sensor?.data_group_id,
+        temperature,
+      });
+
+      await temperatureDataRepository.save(data);
+
+      responseData.push({
+        pin,
+        temperature: data.temperature,
+      });
+    }
+
+    return responseData;
   }
 }
 
