@@ -25,10 +25,8 @@ interface ITemperatureSensor {
   description: string;
   pin: number;
   type: number;
-  lastRecord: {
-    temperature: number;
-    date: Date | number;
-  };
+  temperature: number;
+  date: Date | number;
 }
 interface IResponse {
   leds: ILed[];
@@ -106,10 +104,8 @@ class DatabaseDumpService {
             description: components[i].description,
             pin: components[i].pin,
             type: components[i].type,
-            lastRecord: {
-              temperature: -100,
-              date: -100,
-            },
+            temperature: -100,
+            date: -100,
           };
 
           temperatureSensors.push(tmp);
@@ -120,10 +116,8 @@ class DatabaseDumpService {
             description: components[i].description,
             pin: components[i].pin,
             type: components[i].type,
-            lastRecord: {
-              temperature: tempData.temperature,
-              date: tempData.created_at,
-            },
+            temperature: tempData.temperature,
+            date: tempData.created_at,
           };
 
           temperatureSensors.push(tmp);

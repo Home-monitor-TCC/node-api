@@ -16,6 +16,11 @@ const port = 2233;
 const app = express();
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log(req.body);
+  next();
+});
+
 app.use("/board", boardRouter);
 app.use("/component", componentRouter);
 app.use("/temperature", temperatureRouter);
