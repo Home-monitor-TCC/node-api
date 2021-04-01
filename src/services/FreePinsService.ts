@@ -3,10 +3,6 @@ import { getRepository, Index } from "typeorm";
 import AppError from "../errors/AppError";
 import Board from "../infra/typeorm/entities/Board";
 import Component from "../infra/typeorm/entities/Component";
-import Led from "../infra/typeorm/entities/Led";
-import TemperatureSensor from "../infra/typeorm/entities/TemperatureSensor";
-import TemperatureDataRepository from "../infra/typeorm/repositories/TemperatureDataRepository";
-
 interface IRequest {
   mac_address: string;
 }
@@ -17,7 +13,8 @@ class FreePinsService {
     const componentRepository = getRepository(Component);
 
     var freePinsArray: Number[];
-    var pinsArray = [16, 5, 4, 0, 2, 14, 12, 13, 15, 3, 1];
+    var pinsArray = [0, 1, 2, 3, 4, 5, 12, 13, 14, 15, 16];
+    
     var occupiedPins: Number[] = [];
 
     const checkBoard = await boardRepository.findOne({

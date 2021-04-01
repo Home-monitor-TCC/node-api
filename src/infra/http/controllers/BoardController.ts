@@ -1,5 +1,6 @@
 import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
+import RegisterBoardService from "../../../services/RegisterBoardService";
 import FreePinsService from "../../../services/FreePinsService";
 
 export default class BoardController {
